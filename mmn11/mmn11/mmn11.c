@@ -1,14 +1,12 @@
-// mmn11.cpp : Defines the entry point for the console application.
-//
-
 #include "stdio.h"
 #include "string.h"
 
-int displayAnswer(int functionNumber, int functionAnswer, char *firstArgument, char *secondArgument, char *thirdArgument);
+void displayAnswer(int functionNumber, int functionAnswer, char *firstArgument, char *secondArgument, int thirdArgument);
+int my_strcmp(char *firstArgument, char *secondArgument);
 int my_strncmp(char *firstArgument, char *secondArgument, int n);
 int my_strchr(char *firstArgument, int secondArgument);
 void OptionsMessage();
-int displayAnswer(int functionNumber, int functionAnswer, char *firstArgument, char *secondArgument, char *thirdArgument);
+
 /*
 	Welcome message
 	Ask user to choose which function
@@ -46,19 +44,22 @@ int main()
 			printf("\nSecond argument: ");
 			scanf("%s", secondArgument);
 			funcAnswer = my_strcmp(firstArgument, secondArgument);
-			return displayAnswer(1, funcAnswer, firstArgument, secondArgument, -1);
+			displayAnswer(1, funcAnswer, firstArgument, secondArgument, -1);
+			return funcAnswer;
 			break;
 		case '2':
 			printf("You have chosen strncmp!\n");
 			printf("Please provide string arguments to chosen function.\n");
 			printf("First argument, is a string: ");
-			scanf("%s", firstArgument);
+			gets(firstArgument);
 			printf("\nSecond argument, is a string: ");
-			scanf("%s", secondArgument);
+			gets(secondArgument);
 			printf("\nThird argument, how many bytes to check: ");
-			scanf("%d", nBytes);
+			scanf("%d", &nBytes);
+			printf("\nDEBUG: Third argument i got is: %d",nBytes);
 			funcAnswer = my_strncmp(firstArgument, secondArgument, nBytes);
-			return displayAnswer(2, funcAnswer, firstArgument, secondArgument, nBytes);
+			displayAnswer(2, funcAnswer, firstArgument, secondArgument, nBytes);
+			return funcAnswer;
 			break;
 		case '3':
 			printf("You have chosen strchr!\n");
@@ -66,9 +67,10 @@ int main()
 			printf("First argument, string to look in: ");
 			scanf("%s", firstArgument);
 			printf("\nSecond argument, a char to look for: ");
-			scanf("%d", secondArgument);
-			funcAnswer = my_strchr(firstArgument, secondArgument);
-			return displayAnswer(3, funcAnswer, firstArgument, secondArgument, -1);
+			scanf("%s", secondArgument);
+			funcAnswer = my_strchr(firstArgument, secondArgument[0]);
+			displayAnswer(3, funcAnswer, firstArgument, secondArgument, -1);
+			return funcAnswer;
 			break;
 		case 'q': case 'Q':
 			return 0;
@@ -87,7 +89,7 @@ void OptionsMessage ( void )
 	printf("3) strchr\n\n\t");
 }
 
-int displayAnswer(int functionNumber, int functionAnswer, char *firstArgument, char *secondArgument, char *thirdArgument)
+void displayAnswer(int functionNumber, int functionAnswer, char *firstArgument, char *secondArgument, int thirdArgument)
 {
 	printf("\n\n\n\n\n");
 	switch (functionNumber)
@@ -97,20 +99,25 @@ int displayAnswer(int functionNumber, int functionAnswer, char *firstArgument, c
 		printf("First argument: %s\n", firstArgument);
 		printf("Second argument: %s\n", secondArgument);
 		printf("Function answer was: %d\n", functionAnswer);
-		return functionAnswer;
 		break;
 	case 2: /*strncmp function answer*/
+		printf("Function that ran was 'strncmp'\n");
+		printf("First argument: %s\n", firstArgument);
+		printf("Second argument: %s\n", secondArgument);
+		printf("Third argument: %d\n", thirdArgument);
+		printf("Function answer was: %d\n", functionAnswer);
 
 		break;
 	case 3: /*strchr function answer*/
-
+		printf("Function that ran was 'strchr'\n");
+		printf("First argument: %s\n", firstArgument);
+		printf("Second argument: %s\n", secondArgument);
+		printf("Function answer was: %d\n", functionAnswer);
 		break;
 	default:
 		break;
 	}
-
-
-
+	return;
 }
 
 int my_strcmp(char *firstArgument, char *secondArgument)
@@ -133,7 +140,7 @@ int my_strcmp(char *firstArgument, char *secondArgument)
 int my_strncmp (char *firstArgument, char *secondArgument, int n)
 {
 	int i;
-	for (i = 0; i < n; i++)
+	for (i = 0; i < n && i < strlen(firstArgument) && i < strlen(secondArgument); i++)
 	{
 		if (firstArgument[i] - secondArgument[i] == 0)
 		{
@@ -151,10 +158,15 @@ int my_strncmp (char *firstArgument, char *secondArgument, int n)
 
 int my_strchr (char *firstArgument, int secondArgument)
 {
-
-
-
-
+	int i;
+	
+	for (i = 0; i < strlen(firstArgument); i++)
+	{
+		if (firstArgument[i] == secondArgument)
+		{
+			return i;
+		}
+	}
 	return -1;
 }
 
