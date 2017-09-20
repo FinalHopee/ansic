@@ -9,6 +9,7 @@
 *.opendb
 *.sln
 *.suo
+*.*log
 
 # Object files
 *.o
