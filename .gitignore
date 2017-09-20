@@ -1,6 +1,15 @@
 # Prerequisites
 *.d
 
+#custom edit by sergei
+*.cpp
+*.vcxproj*
+*.h
+*.d*
+*.opendb
+*.sln
+*.suo
+
 # Object files
 *.o
 *.ko
