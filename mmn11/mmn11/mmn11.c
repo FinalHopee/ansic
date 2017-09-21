@@ -1,6 +1,8 @@
 #include "stdio.h"
 #include "string.h"
 
+#define MAX_STRING 128
+
 void displayAnswer(int functionNumber, int functionAnswer, char *firstArgument, char *secondArgument, int thirdArgument);
 int my_strcmp(char *firstArgument, char *secondArgument);
 int my_strncmp(char *firstArgument, char *secondArgument, int n);
@@ -20,7 +22,7 @@ int main()
 	/* Init variables */
 	short func_option, funcAnswer;
 	int nBytes;
-	char firstArgument[128], secondArgument[128];
+	char firstArgument[MAX_STRING], secondArgument[MAX_STRING];
 	
 
 	printf("\t\tWelcome to my_string proram!\n\n\n\t");
@@ -28,7 +30,7 @@ int main()
 	/*While loop, showing options message and taking input from user
 	  inside while loop options for getting rid of white spaces like 'enter'
 	  */
-	while ( (func_option = getchar()) != '\n' || (func_option = getchar()) != ' ')
+	while ( gets(&func_option) )
 	{
 		switch (func_option)
 		{
@@ -40,9 +42,9 @@ int main()
 			printf("You have chosen strcmp!\n");
 			printf("Please provide string arguments to chosen function.\n");
 			printf("First argument: ");
-			scanf("%s", firstArgument);
+			gets(firstArgument);
 			printf("\nSecond argument: ");
-			scanf("%s", secondArgument);
+			gets(secondArgument);
 			funcAnswer = my_strcmp(firstArgument, secondArgument);
 			displayAnswer(1, funcAnswer, firstArgument, secondArgument, -1);
 			return funcAnswer;
@@ -56,7 +58,6 @@ int main()
 			gets(secondArgument);
 			printf("\nThird argument, how many bytes to check: ");
 			scanf("%d", &nBytes);
-			printf("\nDEBUG: Third argument i got is: %d",nBytes);
 			funcAnswer = my_strncmp(firstArgument, secondArgument, nBytes);
 			displayAnswer(2, funcAnswer, firstArgument, secondArgument, nBytes);
 			return funcAnswer;
@@ -65,9 +66,9 @@ int main()
 			printf("You have chosen strchr!\n");
 			printf("Please provide string arguments to chosen function.\n");
 			printf("First argument, string to look in: ");
-			scanf("%s", firstArgument);
+			gets(firstArgument);
 			printf("\nSecond argument, a char to look for: ");
-			scanf("%s", secondArgument);
+			gets(secondArgument);
 			funcAnswer = my_strchr(firstArgument, secondArgument[0]);
 			displayAnswer(3, funcAnswer, firstArgument, secondArgument, -1);
 			return funcAnswer;
@@ -131,27 +132,50 @@ int my_strcmp(char *firstArgument, char *secondArgument)
 		}
 		else
 		{
-			return firstArgument[i] - secondArgument[i];
+			return (firstArgument[i] - secondArgument[i] > 0) ? 1 : -1;
 		}
 	}
-	return 0;
+	/* Need to test if one of strings bigger than the other*/
+	/* If strings equal and got to this line it means they are equal*/
+	if (strlen(firstArgument) == strlen(secondArgument))
+	{
+		return 0;
+	}
+	/* string with different sizes */
+	if (strlen(firstArgument) > strlen(secondArgument))
+	{
+		return 1;
+	}
+	/* otherwise the second string longer */
+	return -1;
 }
 
+/* compare between two string up to 'n'th char */
+/* 'mari'
+   'mari ' */
 int my_strncmp (char *firstArgument, char *secondArgument, int n)
 {
 	int i;
 	for (i = 0; i < n && i < strlen(firstArgument) && i < strlen(secondArgument); i++)
 	{
-		if (firstArgument[i] - secondArgument[i] == 0)
+		if (firstArgument[i] - secondArgument[i] == 0) /* same character */
 		{
 			continue;
 		}
 		else
 		{
-			return firstArgument[i] - secondArgument[i];
+			return (firstArgument[i] - secondArgument[i] > 0) ?  1 : -1  ;
 		}
 	}
-	return 0;
+	if (i == n || (i == strlen(firstArgument) && i == strlen(secondArgument))) /* equal strings*/
+	{
+		return 0;
+	}
+	if (i == strlen(firstArgument)) /* first argument length less than second */
+	{
+		return -1;
+	}
+	return 1; /* first string length is bigger */
 }
 
 
@@ -169,5 +193,3 @@ int my_strchr (char *firstArgument, int secondArgument)
 	}
 	return -1;
 }
-
-
