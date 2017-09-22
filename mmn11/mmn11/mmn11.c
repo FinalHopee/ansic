@@ -19,6 +19,8 @@ void OptionsMessage();
 */
 int main()
 {
+	letters();
+	return 0;
 	/* Init variables */
 	short func_option, funcAnswer;
 	int nBytes;
