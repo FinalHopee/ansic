@@ -63,7 +63,8 @@ void translateLine(char line[])
 			{
 				continue;
 			}
-			else
+			else if (line[i] != '"') /* print char, 
+			* if double quotes need to execute code specific for it down below */
 			{
 				printf("%c",line[i]);
 				newSentence = NO;
