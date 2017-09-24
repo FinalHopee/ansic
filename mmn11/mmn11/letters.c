@@ -1,11 +1,15 @@
 #include <stdio.h>
+#include <string.h>
 
 #define MAX_LINE 128
+#define YES 1
+#define NO 0
+#define ASCII_SMALL_BIG_LETTER 32
 
 int getline(char line[], int max);
 void translateLine(char line[]);
 
-int letters(void)
+int main(void)
 {
 	char line[MAX_LINE];
 
@@ -38,59 +42,106 @@ void translateLine(char line[])
 {
 	int i;
 	short isInsideQuotes, newSentence;
-	isInsideQuotes = 0; /* flag for inside quotes */
-	newSentence = 1; /* marks a beginning of new sentance */
+	newSentence = YES; /* marks a beginning of new sentance */
+	isInsideQuotes = NO; /* flag for inside quotes */
+
 
 	for (i = 0; i < strlen(line); i++)
 	{
 		/* new sentence, not inside quotes */
-		if (newSentence == 1 && isInsideQuotes == 0)
+		if (newSentence == YES && isInsideQuotes == NO)
 		{
 			/* small letters */
 			if (line[i] >= 'a' && line[i] <= 'z')
 			{
-				printf("%s", line[i] - 32);
-				newSentence = 0;
+				printf("%c", line[i] - ASCII_SMALL_BIG_LETTER);
+				newSentence = NO;
 				continue;
 			}
 			/* no white spaces in the beginning of sentence*/
-			if (line[i] == '\n' || line[i] == ' ' || line[i] == '\t')
+			else if (line[i] == '\n' || line[i] == ' ' || line[i] == '\t')
 			{
 				continue;
 			}
-		}
-		/* all letters not inside quotes or new sentance must be small */
-		if (newSentence == 0 && isInsideQuotes == 0 && line[i] >= 'A' && line[i] <= 'z')
-		{
-			if (line[i] >= 'A' && line[i] <= 'Z')
+			else
 			{
-				printf("%s", line[i] + 32);
+				printf("%c",line[i]);
+				newSentence = NO;
+				continue;
+			}
+		}
+		/* Capital letters inside quotes, 
+		 * small letters must be elsewhere */
+		 if(line[i] >= 'A' && line[i] <= 'z')
+		 {
+			 if(isInsideQuotes == YES)
+			 {
+				 if(line[i] >= 'a' && line[i] <= 'z')
+				 {
+					 printf("%c", line[i] - ASCII_SMALL_BIG_LETTER);
+				 }
+				 else
+				 {
+					 printf("%c", line[i]);
+				 }
+			 }
+			 else
+			 {
+				 if (line[i] >= 'a' && line[i] <= 'z')
+				 {
+					 printf("%c", line[i]);
+				 }
+				 else
+				 {
+					 printf("%c", line[i] + ASCII_SMALL_BIG_LETTER);
+				 }
+			 }
+			 continue;
+		 }
+		/* double quotes, beginning and end marker */
+		if(line[i] == '"')
+		{
+			printf("%c", line[i]);
+			if (isInsideQuotes == YES)
+			{
+				isInsideQuotes = NO;
 			}
 			else
 			{
-				printf("%s", line[i]);
+				isInsideQuotes = YES;
 			}
 			continue;
 		}
 		/* numbers NOT inside quotes to be skipped */
 		if (line[i] >= '0' && line[i] <= '9')
 		{
-			if (isInsideQuotes == 1)
-			{
-				printf("%s", line[i]);
-			}
 			continue;
 		}
 		/* dot, end of sentence if NOT inside quotes */
 		if (line[i] == '.')
 		{
-			if (isInsideQuotes == 1)
+			if (isInsideQuotes == YES)
 			{
 				printf(".");
-				continue;
 			}
-			newSentence = 1;
-			printf(".\n\n");
+			else
+			{
+				newSentence = YES;
+				printf(".\n\n");
+			}
+			continue;
+		}
+		/* all letters not inside quotes or new sentance must be small */
+		if (newSentence == NO && isInsideQuotes == NO)
+		{
+			if (line[i] >= 'A' && line[i] <= 'Z')
+			{
+				printf("%c", line[i] + ASCII_SMALL_BIG_LETTER);
+			}
+			else /* prints all other cahracters including small letters */
+			{
+				printf("%c", line[i]);
+			}
 			continue;
 		}
 	}
