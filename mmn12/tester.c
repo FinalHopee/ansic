@@ -20,13 +20,70 @@ void isSquareOutOfBounds(int squareSize, int maxMatrix, int minMatrix)
 
 /* 
  * Checks if given rectangle is a square
+ * 
+ * sumOfSquare -- represents the sum of square elements in row/column/diagonal
  */
 
-int isItMagic(int square[MAX_MATRIX][MAX_MATRIX], int numberOfSquare)
+int isItMagic(int square[MAX_MATRIX][MAX_MATRIX], int numberOfSquare, int sumOfSquare)
 {
-	
-	
-	return -1;
+	/* Defining variables, columns is an array which has sum for it's array number */
+	int row, mainDiag, secondDiag, columns[MAX_MATRIX], i, j;
+
+	/* initiate vars */
+	row = 0;
+	mainDiag = 0;
+	secondDiag = 0;
+	for(i = 0; i < MAX_MATRIX; i++) 
+	{
+		columns[i] = 0;
+	}
+
+	/* Sum calculations */ 
+	for(i = 0; i < numberOfSquare; i++)
+	{
+		for(j = 0; j < numberOfSquare; j++)
+		{
+			/* main diagonal sum */
+			if(i ==  j)
+			{
+				mainDiag +=  square[i][j];
+			}
+			/* secondary diagonal summary*/
+			if(i + j == numberOfSquare + 1)
+			{
+				secondDiag += square[i][j];
+			}
+			columns[j] += square[i][j];
+			row += square[i][j];
+		}
+
+		/* Test if row sum is good */
+		/* calculated sum of row is not correct */
+		if (row != sumOfSquare)
+		{
+			return -1;
+		}
+		/* if it is good - restore row sum to: 0 */
+		row = 0;
+	}
+
+	/* Test the rest, columns and diagonals */
+	for(i = 0; i <squareSize; i++)
+	{
+		if (columns[i] != sumOfSquare)
+		{
+			return -1;
+		}
+	}
+	if (mainDiag != sumOfSquare)
+	{
+		return -1;
+	}
+	if (secondDiag != sumOfSquare)
+	{
+		return -1;
+	} 
+	return 1; /* All good */
 }
 
 /* 
@@ -110,3 +167,10 @@ void createSquare(int square[MAX_MATRIX][MAX_MATRIX], int squareSize,
 		}
 	}
 }
+
+
+
+
+
+
+
