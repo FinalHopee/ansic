@@ -23,12 +23,14 @@ void printSquare(int square[MAX_MATRIX][MAX_MATRIX], int squareSize)
 void printAnswer(int isItMagicSquare, int square[MAX_MATRIX][MAX_MATRIX], 
 									int squareSize)
 	{
-		
-		
-		
-		
-		
-		
-		
-		
+		printf("\n\n");
+		printSquare(square, squareSize);
+		if(isItMagicSquare == 1)
+		{
+			printf("Is a Magic Square!");
+		}
+		else
+		{
+			printf("Is not Magic Square!");
+		}
 	}
