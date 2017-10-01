@@ -35,8 +35,8 @@ int main(int argc, char *argv[])
 	printf("Square input number: %d\n", squareInputnumbers[0]);
 	createSquare(square, numberOfSquare, squareInputnumbers);
 	printSquare(square, numberOfSquare);
-	isItMagicSquare = isItMagic(square, numberOfSquare); /* Checks if given rectangle is a square */
-  printAnswer(isItMagicSquare, square, numberOfSquare);
+	isItMagicSquare = isItMagic(square, numberOfSquare, sumOfSquare); /* Checks if given rectangle is a square */
+  	printAnswer(isItMagicSquare, square, numberOfSquare);
   
 	return 1;
 }
