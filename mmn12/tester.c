@@ -24,7 +24,7 @@ void isSquareOutOfBounds(int squareSize, int maxMatrix, int minMatrix)
  * sumOfSquare -- represents the sum of square elements in row/column/diagonal
  */
 
-int isItMagic(int square[MAX_MATRIX][MAX_MATRIX], int numberOfSquare, int sumOfSquare)
+int isItMagic(int square[MAX_MATRIX][MAX_MATRIX], int squareSize, int sumOfSquare)
 {
 	/* Defining variables, columns is an array which has sum for it's array number */
 	int row, mainDiag, secondDiag, columns[MAX_MATRIX], i, j;
@@ -39,9 +39,9 @@ int isItMagic(int square[MAX_MATRIX][MAX_MATRIX], int numberOfSquare, int sumOfS
 	}
 
 	/* Sum calculations */ 
-	for(i = 0; i < numberOfSquare; i++)
+	for(i = 0; i < squareSize; i++)
 	{
-		for(j = 0; j < numberOfSquare; j++)
+		for(j = 0; j < squareSize; j++)
 		{
 			/* main diagonal sum */
 			if(i ==  j)
@@ -49,7 +49,10 @@ int isItMagic(int square[MAX_MATRIX][MAX_MATRIX], int numberOfSquare, int sumOfS
 				mainDiag +=  square[i][j];
 			}
 			/* secondary diagonal summary*/
-			if(i + j == numberOfSquare + 1)
+			/* secondary located at elements that has their
+			 * location value of i + j == square Size.
+			 * But since i & j start at 0 need to add both 1, hence +2 */
+			if(i + j + 2 == squareSize + 1)
 			{
 				secondDiag += square[i][j];
 			}
@@ -61,6 +64,7 @@ int isItMagic(int square[MAX_MATRIX][MAX_MATRIX], int numberOfSquare, int sumOfS
 		/* calculated sum of row is not correct */
 		if (row != sumOfSquare)
 		{
+			printf("ROW SUM IS: %d", row);
 			return -1;
 		}
 		/* if it is good - restore row sum to: 0 */
@@ -68,19 +72,23 @@ int isItMagic(int square[MAX_MATRIX][MAX_MATRIX], int numberOfSquare, int sumOfS
 	}
 
 	/* Test the rest, columns and diagonals */
-	for(i = 0; i <squareSize; i++)
+	for(i = 0; i < squareSize; i++)
 	{
 		if (columns[i] != sumOfSquare)
 		{
+			printf("COL SUM IS: %d", columns[i]);
 			return -1;
 		}
 	}
 	if (mainDiag != sumOfSquare)
 	{
+		printf("MAIND SUM IS: %d", mainDiag);
 		return -1;
 	}
 	if (secondDiag != sumOfSquare)
 	{
+		printf("SECOND SUM IS: %d", secondDiag);
+		printf("\nSize is: %d\n", squareSize);
 		return -1;
 	} 
 	return 1; /* All good */

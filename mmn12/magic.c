@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 	createSquare(square, numberOfSquare, squareInputnumbers);
 	printSquare(square, numberOfSquare);
 	isItMagicSquare = isItMagic(square, numberOfSquare, sumOfSquare); /* Checks if given rectangle is a square */
-  	printAnswer(isItMagicSquare, square, numberOfSquare);
+  printAnswer(isItMagicSquare, square, numberOfSquare);
   
 	return 1;
 }
