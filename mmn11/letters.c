@@ -1,9 +1,6 @@
 #include <stdio.h>
+#include "letters.h"
 
-
-#define YES 1
-#define NO 0
-#define ASCII_SMALL_BIG_LETTER 32
 
 
 int main(void)

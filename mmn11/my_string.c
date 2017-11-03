@@ -1,13 +1,6 @@
-#include "stdio.h"
-#include "string.h"
-
-#define MAX_STRING 128
-
-void displayAnswer(int functionNumber, int functionAnswer, char *firstArgument, char *secondArgument, int thirdArgument);
-int my_strcmp(char *firstArgument, char *secondArgument);
-int my_strncmp(char *firstArgument, char *secondArgument, int n);
-int my_strchr(char *firstArgument, int secondArgument);
-void OptionsMessage();
+#include <stdio.h>
+#include <string.h>
+#include "my_string.h"
 
 /*
 	Welcome message
@@ -19,10 +12,9 @@ void OptionsMessage();
 */
 int main()
 {
-	letters();
-	return 0;
 	/* Init variables */
 	short func_option, funcAnswer;
+	char *strCharAnswer;
 	int nBytes;
 	char firstArgument[MAX_STRING], secondArgument[MAX_STRING];
 	
@@ -48,7 +40,7 @@ int main()
 			printf("\nSecond argument: ");
 			gets(secondArgument);
 			funcAnswer = my_strcmp(firstArgument, secondArgument);
-			displayAnswer(1, funcAnswer, firstArgument, secondArgument, -1);
+			displayAnswer(1, funcAnswer, firstArgument, secondArgument, -1, NULL);
 			return funcAnswer;
 			break;
 		case '2':
@@ -61,7 +53,7 @@ int main()
 			printf("\nThird argument, how many bytes to check: ");
 			scanf("%d", &nBytes);
 			funcAnswer = my_strncmp(firstArgument, secondArgument, nBytes);
-			displayAnswer(2, funcAnswer, firstArgument, secondArgument, nBytes);
+			displayAnswer(2, funcAnswer, firstArgument, secondArgument, nBytes, NULL);
 			return funcAnswer;
 			break;
 		case '3':
@@ -71,9 +63,9 @@ int main()
 			gets(firstArgument);
 			printf("\nSecond argument, a char to look for: ");
 			gets(secondArgument);
-			funcAnswer = my_strchr(firstArgument, secondArgument[0]);
-			displayAnswer(3, funcAnswer, firstArgument, secondArgument, -1);
-			return funcAnswer;
+			strCharAnswer = my_strchr(firstArgument, secondArgument[0]);
+			displayAnswer(3, -1, firstArgument, secondArgument, -1, strCharAnswer);
+			return strCharAnswer;
 			break;
 		case 'q': case 'Q':
 			return 0;
@@ -92,7 +84,7 @@ void OptionsMessage ( void )
 	printf("3) strchr\n\n\t");
 }
 
-void displayAnswer(int functionNumber, int functionAnswer, char *firstArgument, char *secondArgument, int thirdArgument)
+void displayAnswer(int functionNumber, int functionAnswer, char *firstArgument, char *secondArgument, int thirdArgument, char *strCharAnswer)
 {
 	printf("\n\n\n\n\n");
 	switch (functionNumber)
@@ -115,7 +107,7 @@ void displayAnswer(int functionNumber, int functionAnswer, char *firstArgument, 
 		printf("Function that ran was 'strchr'\n");
 		printf("First argument: %s\n", firstArgument);
 		printf("Second argument: %s\n", secondArgument);
-		printf("Function answer was: %d\n", functionAnswer);
+		printf("Function answer was: %s\n", strCharAnswer);
 		break;
 	default:
 		break;
@@ -182,16 +174,18 @@ int my_strncmp (char *firstArgument, char *secondArgument, int n)
 
 
 
-int my_strchr (char *firstArgument, int secondArgument)
+char *my_strchr (char *firstArgument, int secondArgument)
 {
-	int i;
 	
-	for (i = 0; i < strlen(firstArgument); i++)
+	for (; ; firstArgument++)
 	{
-		if (firstArgument[i] == secondArgument)
+		if (*firstArgument == secondArgument)
 		{
-			return i;
+			return firstArgument;
+		}
+		if (!*firstArgument)
+		{
+			return NULL;
 		}
 	}
-	return -1;
 }
