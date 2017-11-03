@@ -1,0 +1,27 @@
+		Welcome to my_string proram!
+
+
+	Please select one of the following functions to run:
+1) strcmp
+2) strncmp
+3) strchr
+
+	2
+You have chosen strncmp!
+Please provide string arguments to chosen function.
+First argument, is a string: space test    
+
+Second argument, is a string: spacetest
+
+Third argument, how many bytes to check: 7
+
+
+
+
+
+Function that ran was 'strncmp'
+First argument: space test
+Second argument: spacetest
+Third argument: 7
+Function answer was: -1
+

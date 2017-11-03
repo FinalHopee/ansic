@@ -1,0 +1,24 @@
+		Welcome to my_string proram!
+
+
+	Please select one of the following functions to run:
+1) strcmp
+2) strncmp
+3) strchr
+
+	3
+You have chosen strchr!
+Please provide string arguments to chosen function.
+First argument, string to look in: Long text is good as well
+
+Second argument, a char to look for: is
+
+
+
+
+
+Function that ran was 'strchr'
+First argument: Long text is good as well
+Second argument: is
+Function answer was: is good as well
+

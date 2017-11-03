@@ -1,0 +1,27 @@
+		Welcome to my_string proram!
+
+
+	Please select one of the following functions to run:
+1) strcmp
+2) strncmp
+3) strchr
+
+	2
+You have chosen strncmp!
+Please provide string arguments to chosen function.
+First argument, is a string: There anot3r TesT
+
+Second argument, is a string: There anoT3r TesT
+
+Third argument, how many bytes to check: 100
+
+
+
+
+
+Function that ran was 'strncmp'
+First argument: There anot3r TesT
+Second argument: There anoT3r TesT
+Third argument: 100
+Function answer was: 1
+

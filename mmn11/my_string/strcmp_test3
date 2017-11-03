@@ -1,0 +1,24 @@
+		Welcome to my_string proram!
+
+
+	Please select one of the following functions to run:
+1) strcmp
+2) strncmp
+3) strchr
+
+	1
+You have chosen strcmp!
+Please provide string arguments to chosen function.
+First argument: there is noThing to Se3 h3r31       
+
+Second argument: there is noThing to Se3 h3r31
+
+
+
+
+
+Function that ran was 'strcmp'
+First argument: there is noThing to Se3 h3r31
+Second argument: there is noThing to Se3 h3r31
+Function answer was: 0
+
