@@ -1,0 +1,2 @@
+We also want to make sure that each sentence IS the same 64 length, 
+So we Provide to "Identify. 1 how long each 2 sentence" 2 will .be longer sentences will be truncated, and shorter ones padded.
