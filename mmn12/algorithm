@@ -1,0 +1,27 @@
+
+
+    Store the contents of the table into an array list sequentially, beginning at the top row.
+
+    If the size of the array list is not a perfect square, then the contents of the table is not a magic square.
+
+    Using the contains method in the Java API, verify that the array list contains the numbers 1, 2, · · · , n2 . If it does not contain any of these numbers, then the contents of the table is not a magic square.
+
+    Let rowSums and colSums be two arrays of length n with entries all zeros. Also, let sumDiagMajor and sumDiagMinor, representing the sum of the entries along the top-left to bottom-right and top-right to bottom-left diagonals, respectively, of the table.
+
+    Let index = 0
+
+    Repeat until index = n^2
+
+(a) Increment rowSums[row] by ArrayList{index}
+
+(b) increment colSums[col] by ArrayList{index}
+
+(c) If row = col, then increment sumDiagMajor by ArrayList{index}.
+
+(d) If row + col = n − 1, then increment sumDiagMinor by ArrayList{index}
+
+(e) Increment index by 1
+
+    If sumDiagMajor is equal to sumDiagMinor and each entry of rowSums and colSums, the the table is a magic square; otherwise, it is not.
+
+I found a recent post where someone was doing this same thing but I don't understand the last part of the example starting at boolean = true; i am required to print "A n x n magic square if true." or "is not a magic square" if false. Again the following code is not mine.
