@@ -1,13 +1,11 @@
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 #include "getter.c"
 #include "tester.c"
 #include "printer.c"
-#include <math.h>
+#include "magic.h"
 
-#define MAX_MATRIX 10
-#define MIN_MATRIX 3
-#define MAX_ARRAY_INPUT 100
 
 int main(int argc, char *argv[])
 {
@@ -17,25 +15,18 @@ int main(int argc, char *argv[])
 	
 	
 	numberOfSquare = GetNumber();
-	
+	/* Calculating the magic sum which is the sum of row or a column */
 	sumOfSquare = (int)( numberOfSquare * ((numberOfSquare * numberOfSquare) + 1) ) / 2;
-	
-	/* DEBUG */ 
-	printf("sum is: %d\n", sumOfSquare);
-	printf("square number is: %d\n\n", numberOfSquare);
-	/* DEBUG */
 	
 	
   /* If square given is bigger than defined in this program */
 	isSquareOutOfBounds(numberOfSquare, MAX_MATRIX, MIN_MATRIX);
 	getSquareNumbers(squareInputnumbers);
-	printArray(squareInputnumbers);
 	testInputNumber(squareInputnumbers, numberOfSquare);
 	/* Creates a square from input */ 
-	printf("Square input number: %d\n", squareInputnumbers[0]);
 	createSquare(square, numberOfSquare, squareInputnumbers);
-	printSquare(square, numberOfSquare);
-	isItMagicSquare = isItMagic(square, numberOfSquare, sumOfSquare); /* Checks if given rectangle is a square */
+	/* Checks if given rectangle is a square */
+	isItMagicSquare = isItMagic(square, numberOfSquare, sumOfSquare); 
   printAnswer(isItMagicSquare, square, numberOfSquare);
   
 	return 1;

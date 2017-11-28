@@ -108,7 +108,6 @@ int comp (const void * elem1, const void * elem2)
 }
 
 
-
 /* 
  * making sure all numbers between 1 - N^2 inside square
  */
@@ -119,45 +118,31 @@ void testInputNumber(int squareInputnumbers[], int squareSize)
 	/* Creating temp array */
 	for(i = 0; i <= squareSize; i++)
 	{
-		printf("inserting %d inside tempArr[%d]", squareInputnumbers[i], i);
 		tempArr[i] = squareInputnumbers[i];
 	}
-	printf("\nPrinting elements in array before sort:\n\n");
-	for(i =0 ; i < squareSize; i++)
-	{
-		printf("Element: %d\n", tempArr[i]);
-	}
-	
-	printf("Done printing\n");
-	
 	
 	/* sorting temp array */
 	qsort(tempArr, squareSize, sizeof(int), comp);
 	
 	
-	printf("\nPrinting elements in array after sort:\n\n");
-	for(i =0 ; i < squareSize; i++)
-	{
-		printf("Element: %d\n", tempArr[i]);
-	}
-	
-	printf("Done printing\n");
-	
-	
-	
 	/* Testing sorted array, it should have numbers 1 , 2 , 3 .. N^2 */
 	for(i = 0; i < squareSize; i++)
 	{
-		printf("%d ",tempArr[i]);
 		if(tempArr[i] != i + 1)
 		{
 			printf("ERROR: Square should have all numbers from 1 to N^2 once.\n\n");
 			exit(-1);
 		}
 	}
+	/* Test if given more numbers than square should have */
+	if (i < MAX_ARRAY_INPUT && tempArr[i] != -1)
+	{
+		printf("ERROR: Too many numbers provided in input.\n");
+		exit(-1);
+	}
+	
 	printf("\n\n");
 }
-
 
 /* 
  * Creates a square matrix representing a square.
@@ -166,7 +151,9 @@ void testInputNumber(int squareInputnumbers[], int squareSize)
 void createSquare(int square[MAX_MATRIX][MAX_MATRIX], int squareSize, 
 										int *squareInputnumbers)
 {
-	int i, j;
+	int i;
+	int j;
+
 	for(i = 0; i < squareSize; i++)
 	{
 		for(j = 0; j < squareSize; j++)
@@ -175,10 +162,3 @@ void createSquare(int square[MAX_MATRIX][MAX_MATRIX], int squareSize,
 		}
 	}
 }
-
-
-
-
-
-
-

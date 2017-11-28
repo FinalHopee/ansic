@@ -1,10 +1,7 @@
 #include <stdlib.h>
+#include "magic.h"
 
 
-#define MAX_MATRIX 10
-#define MAX_ARRAY_INPUT 100
-#define MIN_MATRIX 3
-#define ASCII_CHAR_TO_DIGIT 48
 
 /*
  * Gets a number from input 
@@ -51,34 +48,6 @@ int GetNumber()
 	return number;
 }
 
-/* 
- * Creates 2-D array representing a square
- 
-void createSquare(int square[MAX_MATRIX][MAX_MATRIX])
-{
-	int num, indexSquareNumbers;
-	 define array for input 
-	int inputSquareArray[MAX_ARRAY_INPUT];
-	
-	while(indexSquareNumbers < MAX_ARRAY_INPUT)
-	{
-		GetNumber();
-		
-		
-		
-	}
-	
-		*/
-	/* Tests if number read is in range 1 - N^2
-	 * isNumInRange(num);
-	 *  
-	
-	
-	
-	
-	
-	
-}*/
 
 /* 
  * Sets input to Array of integers
@@ -90,14 +59,4 @@ void getSquareNumbers(int squareInputnumbers[])
 	{
 		squareInputnumbers[i] = GetNumber();
 	}
-}
-
-void printArray(int squareInputnumbers[])
-{
-	int i;
-	for(i = 0; i < MAX_ARRAY_INPUT; i++)
-	{
-		printf("%d ",squareInputnumbers[i]);
-	}
-	printf("\n\n");
 }
