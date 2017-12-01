@@ -89,5 +89,12 @@ cat ./matrix3_aLetter | ./magic/magic
 echo
 echo
 echo  ==================================================
+echo  "     Testing matrix - 11"
+echo  "       Outside Scope"
+echo  ==================================================
+cat ./matrix11_outsideScope | ./magic/magic
+echo
+echo
+echo  ==================================================
 echo  "          Testing is done, that is all."
 echo  ==================================================
