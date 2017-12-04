@@ -1,56 +1,62 @@
+#include <stdio.h>
 
 
-/* gets command, it should be first. */
-int get_command(char *argv)
+/*
+CCOL - Current Column
+CROW - Current Row
+
+Add and Sub work in the same way, they iterate over the cells and assign the value of the operation on mat A and mat B to mat C.
+*/
+void add_mat(mat* A, mat* B, mat* C)
 {
-	static const char READ_MAT[] = 		"read_mat";
-	static const char PRINT_MAT[] = 	"print_mat";
-	static const char ADD_MAT[] = 		"add_mat";
-	static const char SUB_MAT[] = 		"sub_mat";
-	static const char MUL_MAT[] = 		"mul_mat";
-	static const char MUL_SCALAR[] =    "mul_scalar";
-	static const char STOP[] = 			"stop";
-	unsigned cmd_len;
-	cmd_len = strlen(argv);
-	/* cleaning unneeded comma */ 
-	printf("Command string length: %d\n", cmd_len);
-	printf("Char at loc: %c\n", argv[cmd_len-1]);
-	if(argv[cmd_len-1] == ',')
+	int iterator;
+	printf("-----adding matrixes-----\n");
+	for (iterator = 0; iterator < MAT_MEMBER_CNT; iterator++)
 	{
-		argv[cmd_len-1] = '\0';
+		(*C)[CCOL][CROW] = (*A)[CCOL][CROW] + (*B)[CCOL][CROW];
 	}
-	
-	printf("Got command, %s\n", argv);
+}
 
+void sub_mat(mat* A, mat* B, mat* C)
+{
+	int iterator;
+	printf("-----subtracting matrixes-----\n");
+	for (iterator = 0; iterator < MAT_MEMBER_CNT; iterator++)
+		(*C)[CCOL][CROW] = (*A)[CCOL][CROW] - (*B)[CCOL][CROW];
+}
 
-	if(strcmp(READ_MAT, argv) == 0)
+/*
+Iterates the same way as add and sub, only for each cell in C iterate and calculate the sum of the cell's row in A and the cell's column in B.
+*/
+void mul_mat(mat* A, mat* B, mat* C)
+{
+	int iterator, mulIterator;
+	printf("-----multiplying matrixes-----\n");
+	for (iterator = 0; iterator < MAT_MEMBER_CNT; iterator++)
 	{
-		return 1;
+		(*C)[CCOL][CROW] = 0;
+		mulIterator=0;
+		for (mulIterator=0; mulIterator < MATRIX_SIZE; mulIterator++)
+			(*C)[CCOL][CROW] += (*A)[mulIterator][CROW] * (*B)[CCOL][mulIterator];
 	}
-	else if(strcmp(PRINT_MAT, argv) == 0)
+}
+
+void mul_scalar(mat* A, float scalar, mat* B)
+{
+	int iterator;
+	printf("-----multiplying matrix by scalar-----\n");
+	for (iterator = 0; iterator < MAT_MEMBER_CNT; iterator++)
 	{
-		return 2;
+		(*B)[CCOL][CROW] = (*A)[CCOL][CROW] * scalar;
 	}
-	else if(strcmp(ADD_MAT, argv) == 0)
+}
+
+void trans_mat(mat* A, mat* B)
+{
+	int iterator;
+	printf("-----tranposing matrix-----\n");
+	for (iterator = 0; iterator < MAT_MEMBER_CNT; iterator++)
 	{
-		return 3;
+		(*B)[CCOL][CROW] = (*A)[CROW][CCOL];
 	}
-	else if(strcmp(SUB_MAT, argv) == 0)
-	{
-		return 4;
-	}
-	else if(strcmp(MUL_MAT, argv) == 0)
-	{
-		return 5;
-	}
-	else if(strcmp(MUL_SCALAR, argv) == 0)
-	{
-		return 6;
-	}
-	else if(strcmp(STOP, argv) == 0)
-	{
-		return 7;
-	}
-	
-	return -1;
 }
