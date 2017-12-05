@@ -1,5 +1,12 @@
 #include <stdio.h>
 
+/* Need to test on Unix done at VS Windows */
+
+
+#include "stdafx.h"
+#include <stdio.h>
+#include "mat.h"
+
 
 /*
 CCOL - Current Column
@@ -53,10 +60,15 @@ void mul_scalar(mat* A, float scalar, mat* B)
 
 void trans_mat(mat* A, mat* B)
 {
+	mat temp;
 	int iterator;
 	printf("-----tranposing matrix-----\n");
 	for (iterator = 0; iterator < MAT_MEMBER_CNT; iterator++)
 	{
-		(*B)[CCOL][CROW] = (*A)[CROW][CCOL];
+		temp[CCOL][CROW] = (*A)[CROW][CCOL];
+	}
+	for (iterator = 0; iterator < MAT_MEMBER_CNT; iterator++)
+	{
+		(*B)[CROW][CCOL] = temp[CROW][CCOL];
 	}
 }
